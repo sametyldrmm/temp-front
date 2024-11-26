@@ -1,0 +1,44 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap");
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background-color: #202020;
+  color: #ebebeb;
+  margin: 0;
+  padding: 0;
+}
+
+::-webkit-scrollbar {
+  width: 0px; 
+  height: 0px;
+  opacity: 0; 
+  transition: opacity 0.3s ease; 
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: rgb(225, 118, 118); 
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: transparent; 
+}
+
+.scrollbar-visible::-webkit-scrollbar {
+  opacity: 1; 
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* İki sütun */
+  gap: 1rem; /* Sütunlar arası boşluk */
+}
+
+.grid-item {
+  text-align: left; /* Her öğeyi sola hizala */
+}
+
