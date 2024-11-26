@@ -2,7 +2,7 @@ import { Pool } from 'pg';
 
 const pool = new Pool({
   user: 'bilal',
-  host: 'localhost',
+  host: '51.20.254.151',
   database: 'emindb',
   password: '123',
   port: 5432,

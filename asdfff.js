@@ -1,4 +1,16 @@
-[
+const { Pool } = require('pg');
+
+// Veritabanı bilgilerini girin
+const pool = new Pool({
+  user: 'bilal',
+  host: '51.20.254.151',
+  database: 'emindb',
+  password: '123',
+  port: 5432,
+});
+
+// JSON verileri burada
+const data = [
     { "day": "2024-07-01", "a": 30, "b": 50, "c": 70, "d": 20, "e": 90, "f": 40 },
     { "day": "2024-07-03", "a": 45, "b": 60, "c": 85, "d": 35, "e": 95, "f": 50 },
     { "day": "2024-07-05", "a": 25, "b": 55, "c": 65, "d": 15, "e": 75, "f": 60 },
@@ -53,5 +65,33 @@
     { "day": "2024-11-26", "a": 45, "b": 60, "c": 75, "d": 40, "e": 85, "f": 65 },
     { "day": "2024-11-29", "a": 50, "b": 70, "c": 80, "d": 35, "e": 90, "f": 55 },
     { "day": "2024-12-02", "a": 60, "b": 85, "c": 90, "d": 50, "e": 95, "f": 80 }
-  ]
-  
+    
+];
+
+// Veritabanına bağlan ve işlemleri yap
+const insertData = async () => {
+  const client = await pool.connect();
+
+  try {
+    // Her veri için direkt olarak INSERT işlemi
+    for (const entry of data) {
+      await client.query(
+        `
+        INSERT INTO sensor_data (day, a, b, c, d, e, f)
+        VALUES ($1, $2, $3, $4, $5, $6, $7)
+        `,
+        [entry.day, entry.a, entry.b, entry.c, entry.d, entry.e, entry.f]
+      );
+    }
+
+    console.log('Veriler başarıyla tabloya eklendi.');
+  } catch (error) {
+    console.error('Veri ekleme hatası:', error);
+  } finally {
+    client.release();
+  }
+};
+
+
+// Veritabanına veri ekleme işlemini başlat
+insertData().then(() => pool.end());

@@ -5,11 +5,11 @@ const { Client } = require('pg');
 
 
 const dbClient = new Client({
-    user: 'bilal',
-    host: 'localhost',
-    database: 'emindb',
-    password: '123',
-    port: 5432,
+  user: 'bilal',
+  host: '51.20.254.151',
+  database: 'emindb',
+  password: '123',
+  port: 5432,
 });
 
 // PostgreSQL'e bağlan
@@ -20,7 +20,6 @@ dbClient.connect((err) => {
         console.log('PostgreSQL veritabanına bağlanıldı.');
     }
 });
-
 
 
 // HiveMQ Cloud bilgileri
