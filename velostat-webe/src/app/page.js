@@ -20,6 +20,8 @@ export default function HomePage() {
     "07", "08", "09", "10", "11", "12"
   ];
 
+  const userDefinedValues = { "day": "", "a": 500, "b": 500, "c": 500, "d": 500, "e": 500, "f": 500 };
+
   const fetchDataForDay = async (day) => {
     setLoading(true);
     try {
@@ -90,12 +92,12 @@ export default function HomePage() {
     }
   };
 
-  const calculateAverage = (day) => {
+  const calculateAverageOld = (day) => {
     if (!dailyData[day] || dailyData[day].length === 0) return {};
   
     const rawData = dailyData[day];
     const averages = {};
-  
+
     rawData.forEach((entry) => {
       Object.keys(entry).forEach((key) => {
         if (typeof entry[key] === "number") {
@@ -106,7 +108,6 @@ export default function HomePage() {
         }
       });
     });
-  
     Object.keys(averages).forEach((key) => {
       averages[key] /= rawData.length;
     });
@@ -115,28 +116,71 @@ export default function HomePage() {
     return averages;
   };
   
+  const calculateAverage = (day) => {
+    if (!dailyData[day] || dailyData[day].length === 0) return 0;
+  
+    const rawData = dailyData[day];
+    let totalSimilarity = 0;
+  
+    rawData.forEach((entry) => {
+      totalSimilarity += calculateSimilarity(userDefinedValues, entry); 
+    });
+  
+    const averageSimilarity = totalSimilarity / rawData.length;
+  
+    console.log("Calculated Averages for Day:", day, averageSimilarity); // Console log to verify calculated averages
+    return averageSimilarity;
+  };
   
 
+  function calculateSimilarity(values1, values2) {
+    let totalSimilarity = 0;
+    const keys = Object.keys(values1);
+  
+    for (let key of keys) {
+      if (key !== "day") {
+        const maxVal = Math.max(values1[key], values2[key]);
+        const minVal = Math.min(values1[key], values2[key]);
+        totalSimilarity += (minVal / maxVal) * 100;
+      }
+    }
+  
+    return totalSimilarity / (keys.length - 1); // "day" alanını saymadığımız için -1
+  }
+
+  // const calculateCorrectIncorrect = (day) => {
+  //   const averages = calculateAverage(day);
+  //   // if (Object.keys(averages).length === 0) return { correct: 0, incorrect: 100 };
+  //   if (averages === 0) 
+  //     return { correct: 0, incorrect: 100 };
+  //   // const totalAverage = Object.values(averages).reduce((acc, value) => acc + parseFloat(value), 0) / Object.keys(averages).length;
+  //   const totalAverage = averages;
+  //   const correct = parseFloat(totalAverage).toFixed(2);
+  //   const incorrect = (100 - correct).toFixed(2);
+  //   return { correct, incorrect };
+  // };  
+
   const calculateCorrectIncorrect = (day) => {
-    const averages = calculateAverage(day);
-    if (Object.keys(averages).length === 0) return { correct: 0, incorrect: 100 };
-    const totalAverage = Object.values(averages).reduce((acc, value) => acc + parseFloat(value), 0) / Object.keys(averages).length;
-    const correct = parseFloat(totalAverage).toFixed(2);
+    const average = calculateAverage(day);
+    if (average === 0) return { correct: 0, incorrect: 100 };
+  
+    const correct = parseFloat(average).toFixed(2);
     const incorrect = (100 - correct).toFixed(2);
     return { correct, incorrect };
-  };  
+  };
+  
 
   const getDayData = (day) => {
     if (!day || !dailyData || !dailyData[day]) {
-      return "Bu tarihte veri yok";
+      return "";
     }
   
-    const data = calculateAverage(day);
-    if (Object.keys(data).length === 0) return "Bu tarihte veri yok";
+    const data = calculateAverageOld(day);
+    if (Object.keys(data).length === 0) return "";
   
     return (
-      <div className="flex space-x-12 font-black">
-        <div className="grid-container">
+      <div className="flex space-x-12 font-black ">
+        <div className="grid-container pl-8">
           {Object.keys(data).map((key, index) => {
             if (key === 'id') return null; // 'id' anahtarını atla
             return (
@@ -154,79 +198,55 @@ export default function HomePage() {
     const allDays = Object.keys(weeklyData);
     if (allDays.length === 0) return { correct: 0, incorrect: 100 };
   
-    let totalAverage = 0;
+    let totalSimilarity = 0;
     let dayCount = 0;
   
     allDays.forEach((day) => {
       if (weeklyData[day] && Array.isArray(weeklyData[day]) && weeklyData[day].length > 0) {
         const rawData = weeklyData[day];
-        const averages = {};
         rawData.forEach((entry) => {
-          Object.keys(entry).forEach((key) => {
-            if (typeof entry[key] === "number") {
-              if (!averages[key]) {
-                averages[key] = 0;
-              }
-              averages[key] += entry[key];
-            }
-          });
+          totalSimilarity += calculateSimilarity(userDefinedValues, entry);
         });
-        Object.keys(averages).forEach((key) => {
-          averages[key] /= rawData.length;
-        });
-        const dayAverage = Object.values(averages).reduce((acc, value) => acc + parseFloat(value), 0) / Object.keys(averages).length;
-        totalAverage += dayAverage;
-        dayCount++;
+        dayCount += rawData.length;
       }
     });
   
     if (dayCount === 0) return { correct: 0, incorrect: 100 };
   
-    const weeklyAverage = totalAverage / dayCount;
+    const weeklyAverage = totalSimilarity / dayCount;
     const correct = parseFloat(weeklyAverage).toFixed(2);
     const incorrect = (100 - correct).toFixed(2);
   
     return { correct, incorrect };
   };
   
+  
   const calculateMonthlyAverage = (month) => {
     const allDays = Object.keys(monthlyData).filter(day => day.includes(`-${month}-`));
     if (allDays.length === 0) return { correct: 0, incorrect: 100 };
   
-    let totalAverage = 0;
+    let totalSimilarity = 0;
     let dayCount = 0;
   
     allDays.forEach((day) => {
       if (monthlyData[day] && Array.isArray(monthlyData[day])) {
         const rawData = monthlyData[day];
-        const averages = {};
         rawData.forEach((entry) => {
-          Object.keys(entry).forEach((key) => {
-            if (typeof entry[key] === "number") {
-              if (!averages[key]) {
-                averages[key] = 0;
-              }
-              averages[key] += entry[key];
-            }
-          });
+          totalSimilarity += calculateSimilarity(userDefinedValues, entry);
         });
-        Object.keys(averages).forEach((key) => {
-          averages[key] /= rawData.length;
-        });
-        const dayAverage = Object.values(averages).reduce((acc, value) => acc + parseFloat(value), 0) / Object.keys(averages).length;
-        totalAverage += dayAverage;
-        dayCount++;
+        dayCount += rawData.length;
       }
     });
   
     if (dayCount === 0) return { correct: 0, incorrect: 100 };
   
-    const monthlyAverage = totalAverage / dayCount;
+    const monthlyAverage = totalSimilarity / dayCount;
     const correct = parseFloat(monthlyAverage).toFixed(2);
     const incorrect = (100 - correct).toFixed(2);
   
     return { correct, incorrect };
-  };  
+  };
+  
 
   const renderDailyPieChart = () => {
     const { correct, incorrect } = calculateCorrectIncorrect(selectedDay);
@@ -454,7 +474,10 @@ export default function HomePage() {
             alt="Example PNG"
             className="mb-4 max-w-[1000px] h-auto lg:block sm:hidden"
           />
-          <div>
+          <div className="-mt-20">
+            {viewMode === "day" && (
+              <p className="font-semibold text-center mb-8 text-2xl">Bölgeye Temas Oranı</p>
+            )}
             {getDayData(selectedDay)}
           </div>
         </div>
