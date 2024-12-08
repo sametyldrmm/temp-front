@@ -457,42 +457,42 @@ export default function HomePage() {
       <div className="flex flex-col lg:flex-row space-y-10 lg:space-y-0 lg:space-x-10 w-full max-w-[1400px] mt-10 mb-32">
         <div className="flex-1 bg-button-gray p-8 text-white rounded-3xl max-h-[560px] overflow-y-auto">
           <h3 className="text-3xl mt-4 mb-4 m-2 text-center font-black">BİLGİLENDİRME</h3>
-          <div class="rounded-lg p-2 mb-6">
-            <h2 class="text-xl text-gray-100 font-semibold mb-2">A Bölgesi (Omuz Üstü - Boyun ve Üst Sırt)</h2>
-            <p class="text-gray-200">8 saatten fazla yanlış oturmak boyun kaslarında aşırı gerginliğe yol açarak baş ağrılarına ve boyun bölgesinde kronik ağrılara neden olabilir.</p>
+          <div className="rounded-lg p-2 mb-6">
+            <h2 className="text-xl text-gray-100 font-semibold mb-2">A Bölgesi (Omuz Üstü - Boyun ve Üst Sırt)</h2>
+            <p className="text-gray-200">8 saatten fazla yanlış oturmak boyun kaslarında aşırı gerginliğe yol açarak baş ağrılarına ve boyun bölgesinde kronik ağrılara neden olabilir.</p>
           </div>
 
-          <div class="rounded-lg p-2 mb-6">
-            <h2 class="text-xl text-gray-100 font-semibold mb-2">B Bölgesi (Omuz Altı ve Kürek Kemiği Alanı)</h2>
-            <p class="text-gray-200">6-7 saat yanlış oturmak bu bölgedeki kasların zayıflamasına, özellikle kamburluk ve sırt ağrılarının ortaya çıkmasına ve çeşitli kas spazmlarına neden olabilir.</p>
+          <div className="rounded-lg p-2 mb-6">
+            <h2 className="text-xl text-gray-100 font-semibold mb-2">B Bölgesi (Omuz Altı ve Kürek Kemiği Alanı)</h2>
+            <p className="text-gray-200">6-7 saat yanlış oturmak bu bölgedeki kasların zayıflamasına, özellikle kamburluk ve sırt ağrılarının ortaya çıkmasına ve çeşitli kas spazmlarına neden olabilir.</p>
           </div>
 
-          <div class="rounded-lg p-2 mb-6">
-            <h2 class="text-xl text-gray-100 font-semibold mb-2">C Bölgesi (Göğüs Orta Hattı - Omurganın Üst Kısmı)</h2>
-            <p class="text-gray-200">9-10 saat yanlış oturmak, akciğer kapasitesinin düşmesine, kaburga ağrılarına ve nefes darlığına yol açabilir.</p>
+          <div className="rounded-lg p-2 mb-6">
+            <h2 className="text-xl text-gray-100 font-semibold mb-2">C Bölgesi (Göğüs Orta Hattı - Omurganın Üst Kısmı)</h2>
+            <p className="text-gray-200">9-10 saat yanlış oturmak, akciğer kapasitesinin düşmesine, kaburga ağrılarına ve nefes darlığına yol açabilir.</p>
           </div>
 
-          <div class="rounded-lg p-2 mb-6">
-            <h2 class="text-xl text-gray-100 font-semibold mb-2">D Bölgesi (Omurganın Orta Hattı)</h2>
-            <p class="text-gray-200">10 saatten fazla yanlış oturmak bu bölgede disk dejenerasyonuna yol açabilir, omurga eğriliği ve bel fıtığı riskini artırabilir.</p>
+          <div className="rounded-lg p-2 mb-6">
+            <h2 className="text-xl text-gray-100 font-semibold mb-2">D Bölgesi (Omurganın Orta Hattı)</h2>
+            <p className="text-gray-200">10 saatten fazla yanlış oturmak bu bölgede disk dejenerasyonuna yol açabilir, omurga eğriliği ve bel fıtığı riskini artırabilir.</p>
           </div>
 
-          <div class="rounded-lg p-2 mb-6">
-            <h2 class="text-xl text-gray-100 font-semibold mb-2">E Bölgesi (Alt Sırt - Bel Bölgesi)</h2>
-            <p class="text-gray-200">5-6 saat yanlış oturmak, bel omurlarına ekstra yük bindirir ve bel ağrısı ile siyatik sinir sıkışmasını tetikleyebilir. Ayrıca bel fıtığı riskini artırır.</p>
+          <div className="rounded-lg p-2 mb-6">
+            <h2 className="text-xl text-gray-100 font-semibold mb-2">E Bölgesi (Alt Sırt - Bel Bölgesi)</h2>
+            <p className="text-gray-200">5-6 saat yanlış oturmak, bel omurlarına ekstra yük bindirir ve bel ağrısı ile siyatik sinir sıkışmasını tetikleyebilir. Ayrıca bel fıtığı riskini artırır.</p>
           </div>
 
-          <div class="rounded-lg p-2 mb-6">
-            <h2 class="text-xl text-gray-100 font-semibold mb-2">F Bölgesi (Alt Omurga - Kuyruk Sokumu)</h2>
-            <p class="text-gray-200">8-9 saat yanlış oturmak, bu bölgedeki sinirlerin sıkışmasına ve kuyruk sokumu ağrılarının oluşmasına neden olabilir.</p>
+          <div className="rounded-lg p-2 mb-6">
+            <h2 className="text-xl text-gray-100 font-semibold mb-2">F Bölgesi (Alt Omurga - Kuyruk Sokumu)</h2>
+            <p className="text-gray-200">8-9 saat yanlış oturmak, bu bölgedeki sinirlerin sıkışmasına ve kuyruk sokumu ağrılarının oluşmasına neden olabilir.</p>
           </div>
 
-          <div class="rounded-lg p-2 mb-6">
-            <h2 class="text-xl text-gray-100 font-semibold mb-2">Genel Öneriler:</h2>
-            <ul class="list-disc list-inside text-gray-200">
-              <li><span class="font-semibold">Duruşu Düzeltmek:</span> Dik oturmaya ve her 30-40 dakikada bir pozisyon değiştirmeye özen gösterin.</li>
-              <li><span class="font-semibold">Ergonomik Destek:</span> Bel ve sırt için uygun bir destek kullanın.</li>
-              <li><span class="font-semibold">Fiziksel Aktivite:</span> Günde en az 30 dakika egzersiz, sırt kaslarının güçlenmesini destekler.</li>
+          <div className="rounded-lg p-2 mb-6">
+            <h2 className="text-xl text-gray-100 font-semibold mb-2">Genel Öneriler:</h2>
+            <ul className="list-disc list-inside text-gray-200">
+              <li><span className="font-semibold">Duruşu Düzeltmek:</span> Dik oturmaya ve her 30-40 dakikada bir pozisyon değiştirmeye özen gösterin.</li>
+              <li><span className="font-semibold">Ergonomik Destek:</span> Bel ve sırt için uygun bir destek kullanın.</li>
+              <li><span className="font-semibold">Fiziksel Aktivite:</span> Günde en az 30 dakika egzersiz, sırt kaslarının güçlenmesini destekler.</li>
             </ul>
           </div>
 
